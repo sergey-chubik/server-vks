@@ -1,0 +1,23 @@
+---
+
+ovirt_vm_name: vks
+ovirt_vm_ip: 10.66.198.160
+ovirt_template: Centos7
+ovirt_vm_cpu_sockets: 4
+ovirt_vm_cpu_cores: 1
+ovirt_vm_cpu_threads: 2
+ovirt_vm_memory: 8GiB
+ovirt_vm_memory_guaranteed: 8GiB
+openmcu_templates: "{{ inventory_dir }}/templates"
+openmcu_copy_custom_settings: true
+firewall_firewalld_port_rules:
+  - port: 1420/tcp
+  - port: 1554/tcp
+  - port: 1719-1721/tcp
+  - port: 5060-5061/tcp
+  - port: 30000-39000/tcp
+  - port: 1719-1721/udp
+  - port: 5060-5061/udp
+  - port: "{{ openmcu_rtp_base_port }}-{{ openmcu_rtp_max_port }}/udp"
+  - port: 10050-10051/tcp
+  - port: 161-162/udp

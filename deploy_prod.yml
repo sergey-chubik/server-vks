@@ -1,0 +1,25 @@
+---
+
+- name: RUN CONFIGURE OVIRT ENVIRONMENT
+  hosts: all
+  connection: local
+  pre_tasks:
+    - stat:
+        path: "{{ inventory_dir }}/secrets/vars"
+      connection: local
+      register: secrets_path
+      become: no
+    - include_vars:
+        dir: "{{ secrets_path.stat.path }}"
+      when: secrets_path.stat.exists
+  roles:
+    - ovirt_vm_create
+
+- name: DEPLOY SERVER OpenMCU
+  hosts: all
+  roles:
+    - update_packages
+    - selinux
+    - openmcu
+    - firewall
+    - zabbix_agent

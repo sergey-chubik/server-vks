@@ -1,0 +1,16 @@
+---
+
+ovirt_vm_name: test_vks
+ovirt_vm_ip: 10.66.198.179
+ovirt_template: Centos7
+openmcu_templates: "{{ inventory_dir }}/templates"
+openmcu_copy_custom_settings: true
+firewall_firewalld_port_rules:
+  - port: 1420/tcp
+  - port: 1554/tcp
+  - port: 1719-1721/tcp
+  - port: 5060-5061/tcp
+  - port: 30000-39000/tcp
+  - port: 1719-1721/udp
+  - port: 5060-5061/udp
+  - port: "{{ openmcu_rtp_base_port }}-{{ openmcu_rtp_max_port }}/udp"
